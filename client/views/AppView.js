@@ -2,13 +2,9 @@
 var AppView = Backbone.View.extend({
 
   initialize: function(params) {
-    // this.playerView = new PlayerView({el: ".player", model: this.model.get('currentSong')});
-    this.mediaAreaView = new MediaAreaView({el: ".player", model: this.model.get('currentSong') });
-    this.libraryView = new LibraryView({el: ".lib", collection: this.model.get('library')});
-    this.songQueueView = new SongQueueView({el: ".queue", collection: this.model.get('songQueue')});
-    // not sure what to instantiate with
-    // this.songQueueView = new SongQueueView();
-
+    this.libraryView = new LibraryView({collection: this.model.get('library')});
+    this.songQueueView = new SongQueueView({collection: this.model.get('songQueue')});
+    this.playerView = new PlayerView({model: this.model.get('currentSong')});
 
     // change:currentSong - this is Backbone's way of allowing you to filter events to
     // ONLY receive change events for the specific property, 'currentSong'
@@ -20,14 +16,14 @@ var AppView = Backbone.View.extend({
 
   render: function() {
 
-    return function() {
+    var library = $('<div class="library col-md-4"></div>').append($('<h4>Library</h4>'), this.libraryView.$el);
+    var player = $('<div class="player col-md-8"></div>').append($(this.playerView.$el));
+    var queue = $('<div class="queue col-md-8"></div>').append($('<h4>Playlist</h4>'), this.songQueueView.$el);
 
-      // this.playerView.$el.render();
-      this.mediaAreaView.$el.render();
-      this.songQueueView.$el.render();
-      this.libraryView.$el.render();
 
-    }();
+    var row = $('<div class="row"></div').append(library, player, queue);
+
+    return this.$el.html(row);
 
     // return this.$el.html([
     //   this.playerView.$el,
