@@ -15,14 +15,6 @@ var AppView = Backbone.View.extend({
       this.playerView.setSong(model.get('currentSong'));
     }, this);
 
-
-    var that = this;
-    this.playerView.$el.on('ended', function(){
-      console.log("ENDED THE SONG IN APPVIEW");
-      console.log(that.songQueueView);
-    });
-
-
   },
 
   render: function() {
