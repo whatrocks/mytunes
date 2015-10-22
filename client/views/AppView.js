@@ -2,9 +2,10 @@
 var AppView = Backbone.View.extend({
 
   initialize: function(params) {
-    this.playerView = new PlayerView({model: this.model.get('currentSong')});
-    this.libraryView = new LibraryView({collection: this.model.get('library')});
-    this.songQueueView = new SongQueueView({collection: this.model.get('songQueue')});
+    // this.playerView = new PlayerView({el: ".player", model: this.model.get('currentSong')});
+    this.mediaAreaView = new MediaAreaView({el: ".player", model: this.model.get('currentSong') });
+    this.libraryView = new LibraryView({el: ".lib", collection: this.model.get('library')});
+    this.songQueueView = new SongQueueView({el: ".queue", collection: this.model.get('songQueue')});
     // not sure what to instantiate with
     // this.songQueueView = new SongQueueView();
 
@@ -18,11 +19,23 @@ var AppView = Backbone.View.extend({
   },
 
   render: function() {
-    return this.$el.html([
-      this.playerView.$el,
-      this.libraryView.$el,
-      this.songQueueView.$el
-    ]);
+
+    return function() {
+
+      // this.playerView.$el.render();
+      this.mediaAreaView.$el.render();
+      this.songQueueView.$el.render();
+      this.libraryView.$el.render();
+
+    }();
+
+    // return this.$el.html([
+    //   this.playerView.$el,
+    //   this.libraryView.$el,
+    //   this.songQueueView.$el
+    // ]);
+  
+
   }
 
 });
