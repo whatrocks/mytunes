@@ -9,13 +9,13 @@ var PlayerView = Backbone.View.extend({
   
   initialize: function() {
 
-  console.log(this.$el);
+    console.log(this.$el);
 
-  var that = this;
-    this.$el.on("ended", function(){
-      that.model.dequeue();
-      that.model.ended();
-    });
+    var that = this;
+      this.$el.on("ended", function(){
+        that.model.dequeue();
+        that.model.ended();
+      });
   },
 
   setSong: function(song) {
