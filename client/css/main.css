@@ -1,0 +1,36 @@
+
+h1 {
+  font-family: 'Londrina Sketch', cursive;
+  font-size: 70px;
+  /*text-indent: 7px;*/
+}
+
+.visualizer {
+  border: 1px solid black;
+  height: 400px;
+  background: url('https://media.giphy.com/media/XMZqtJZWGsUZq/giphy.gif') no-repeat;
+  background-size: 100%;
+  margin-top: 30px;
+}
+
+audio {
+  width: 100%;
+}
+
+span {
+  padding-bottom: 10px;
+}
+
+
+span:hover {
+
+  cursor: pointer;
+  color: #00DFFC;
+  font-weight: bold;
+
+}
+
+body {
+  background-color: #343838;
+  color: #FFF;
+}

@@ -1,16 +1,29 @@
 <!DOCTYPE html>
 <html>
-  <body>
-    <!-- Scripts may be placed anywhere on a page. But FYI, they block rendering of elements
-     below them until after the scripts load-->
+  <head>
+
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+
     <link rel="stylesheet" type="text/css" href="bower_components/bootstrap/dist/css/bootstrap.css">
     <link rel="stylesheet" type="text/css" href="bower_components/bootstrap/dist/css/bootstrap-theme.css">
+    <link rel="stylesheet" type="text/css" href="css/main.css">
+    <link href='https://fonts.googleapis.com/css?family=Londrina+Sketch' rel='stylesheet' type='text/css'>
 
-    <script src="bower_components/bootstrap/dist/js/bootstrap.js"></script>
+    <title>Muddy Rocks</title>
+  
+  </head>   
+  <body>
+
+
+
+
+    <!-- Scripts may be placed anywhere on a page. But FYI, they block rendering of elements
+     below them until after the scripts load-->
 
     <script src="bower_components/jquery/jquery.min.js"></script>
     <script src="bower_components/underscore/underscore.js"></script>
     <script src="bower_components/backbone/backbone.js"></script>
+    <script src="bower_components/bootstrap/dist/js/bootstrap.js"></script>
 
     <script src="data/data.js"></script>
 
@@ -25,20 +38,47 @@
     <script src="views/AppView.js"></script>
     <script src="views/SongQueueView.js"></script>
     <script src="views/SongQueueEntryView.js"></script>
+    <script src="views/VisualizerView.js"></script>
+
+    <script src="https://connect.soundcloud.com/sdk/sdk-3.0.0.js"></script>
+
+    <div class="container main">
+        
+    
+        <script>
+          $(function() {
+            // set up model objects
+            var library = new Songs(songData);
+            var app = new AppModel({library: library});
+
+            // build a view for the top level of the whole app
+            var appView = new AppView({model: app});
+
+            // put the view onto the screen
+            $('.main').append(appView.render());
+
+          });
+        </script>
+        
+        <div class="results"></div>
+
+        <script>
 
 
-    <script>
-      $(function() {
-        // set up model objects
-        var library = new Songs(songData);
-        var app = new AppModel({library: library});
+            $(document).ready(function() {
+              
+                SC.initialize({
+                    client_id: '0940f7e23348de7bd4199673cfdc4a5d',
+                });
 
-        // build a view for the top level of the whole app
-        var appView = new AppView({model: app});
+                var tracks = SC.get('/tracks', { genres: 'country' });
+                console.log(tracks._results[1]);
 
-        // put the view onto the screen
-        $('body').append(appView.render());
-      });
-    </script>
+            });
+
+        </script>
+
+    </div>
+
   </body>
 </html>
